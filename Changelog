@@ -1,0 +1,14 @@
+v0.1.3
++ Publish with npm
+
+v0.1.2
++ File cleanup and a README added
+
+v0.1.1
++ Bug fixes and cleanup
+
+v0.1.0
++ First working producer. Start zookeeper, kafka and a consumer, then run node test.js to publish a message
+
+TODO
+- Add a Consumer

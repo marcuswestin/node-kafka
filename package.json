@@ -1,0 +1,30 @@
+{
+  "name": "kafka",
+  "description": "A node client for Kafka"
+  "version": "0.1.0",
+  "homepage": "https://github.com/marcuswestin/kafka-node-client",
+  "author": "Marcus Westin <narcvs@gmail.com> (http://marcuswest.in)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marcuswestin/kafka-node-client.git"
+  },
+  "bugs": {
+    "url": "http://github.com/marcuswestin/kafka-node-client/issues"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/marcuswestin/kafka-node-client/raw/master/LICENSE"
+    }
+  ],
+  "main": "kafka",
+  "directories": {
+    "lib": "."
+  },
+  "files": [
+    ""
+  ]
+}
