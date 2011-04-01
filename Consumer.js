@@ -2,7 +2,7 @@ var std = require('std'),
 	events = require('events'),
 	Client = require('./Client')
 
-module.exports = std.Class(Client, function() {
+module.exports = std.Class(Client, function(supr) {
 
 	var defaults = {
 		pollInterval: 2000
