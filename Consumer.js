@@ -10,7 +10,7 @@ module.exports = std.Class(Client, function(supr) {
 
 	this._init = function(opts) {
 		supr(this, '_init', arguments)
-		std.merge(opts, defaults)
+		std.extend(opts, defaults)
 		this._pollInterval = opts.pollInterval
 		events.EventEmitter.call(this)
 	}
