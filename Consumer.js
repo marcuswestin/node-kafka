@@ -21,7 +21,7 @@ module.exports = std.Class(Client, function(supr) {
 	}
 
 	this._onConnected = function(callback) {
-		callback()
+		if (callback) { callback() }
 		this._intervalID = setInterval(std.bind(this, '_pollForMessages'), this._pollInterval)
 	}
 
