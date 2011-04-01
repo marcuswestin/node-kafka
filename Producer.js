@@ -1,22 +1,22 @@
 var net = require('net'),
 	events = require('events'),
-	bind = require('./lib/bind'),
+	std = require('std'),
 	pack = require('./lib/pack'),
 	crc32 = require('./lib/crc32'),
 	requestTypes = require('./requestTypes')
 
-var Producer = module.exports = function(host, port) {
-	this._host = host
-	this._port = port
-	this._connected = false
-}
+module.exports = std.Class(function() {
+	
+	this._magicValue = 0
+	this._requestType = requestTypes.PRODUCE
 
-Producer.prototype = {
+	this._init = function(host, port) {
+		this._host = host
+		this._port = port
+		this._connected = false
+	}
 
-	_magicValue: 0,
-	_requestType: requestTypes.PRODUCE,
-
-	connect: function(callback) {
+	this.connect = function(callback) {
 		if (this._connected) {
 			callback()
 		} else if (this._connectCallbacks) {
@@ -24,7 +24,7 @@ Producer.prototype = {
 		} else {
 			this._connectCallbacks = [callback]
 			this._connection = net.createConnection(this._port, this._host)
-			this._connection.on('connect', bind(this, function() {
+			this._connection.on('connect', std.bind(this, function() {
 				this._connected = true
 				for (var i=0; i < this._connectCallbacks.length; i++) {
 					this._connectCallbacks[i]()
@@ -33,22 +33,22 @@ Producer.prototype = {
 			}))
 		}
 		return this
-	},
+	}
 
-	send: function(messages, topic, partition) {
+	this.send = function(messages, topic, partition) {
 		if (!partition) { partition = 0 }
 		if (!(messages instanceof Array)) { messages = [messages] }
 		this._connection.write(this._encodeRequest(topic, partition, messages))
 		return this
-	},
+	}
 
-	close: function() {
+	this.close = function() {
 		this._connection.end()
 		this._connected = false
 		return this
-	},
+	}
 
-	_encodeRequest: function(topic, partition, messages) {
+	this._encodeRequest = function(topic, partition, messages) {
 		var encodedMessages = ''
 		for (var i=0; i<messages.length; i++) {
 			var encodedMessage = this._encodeMessage(messages[i])
@@ -69,11 +69,9 @@ Producer.prototype = {
 		}
 
 		return buffer
-	},
+	}
 
-	_encodeMessage: function(message) {
+	this._encodeMessage = function(message) {
 		return pack('CN', this._magicValue, crc32(message)) + message
 	}
-}
-
-
+})
