@@ -1,50 +1,18 @@
-var net = require('net'),
-	events = require('events'),
-	std = require('std'),
+var std = require('std'),
 	pack = require('./lib/pack'),
 	crc32 = require('./lib/crc32'),
+	Client = require('./Client'),
 	requestTypes = require('./requestTypes')
 
-module.exports = std.Class(function() {
+module.exports = std.Class(Client, function() {
 	
 	this._magicValue = 0
 	this._requestType = requestTypes.PRODUCE
-
-	this._init = function(host, port) {
-		this._host = host
-		this._port = port
-		this._connected = false
-	}
-
-	this.connect = function(callback) {
-		if (this._connected) {
-			callback()
-		} else if (this._connectCallbacks) {
-			this._connectCallbacks.push(callback)
-		} else {
-			this._connectCallbacks = [callback]
-			this._connection = net.createConnection(this._port, this._host)
-			this._connection.on('connect', std.bind(this, function() {
-				this._connected = true
-				for (var i=0; i < this._connectCallbacks.length; i++) {
-					this._connectCallbacks[i]()
-				}
-				delete this._connectCallbacks
-			}))
-		}
-		return this
-	}
 
 	this.send = function(messages, topic, partition) {
 		if (!partition) { partition = 0 }
 		if (!(messages instanceof Array)) { messages = [messages] }
 		this._connection.write(this._encodeRequest(topic, partition, messages))
-		return this
-	}
-
-	this.close = function() {
-		this._connection.end()
-		this._connected = false
 		return this
 	}
 
