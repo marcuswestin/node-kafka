@@ -1,7 +1,8 @@
 var std = require('std'),
-	net = require('net')
+	net = require('net'),
+	events = require('events')
 
-module.exports = std.Class(function() {
+module.exports = std.Class(events.EventEmitter, function() {
 
 	var defaults = {
 		host: 'localhost',
