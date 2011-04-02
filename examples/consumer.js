@@ -1,6 +1,11 @@
 var kafka = require('../kafka-node')
 
-var consumer = new kafka.Consumer({ host:'localhost', port:9092 })
+var consumer = new kafka.Consumer({
+	host:'localhost',
+	port:9092,
+	topic:'test',
+	pollInterval: 1000
+})
 
 consumer.connect()
 consumer.on('Message', function(message) {
