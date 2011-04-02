@@ -40,4 +40,15 @@ module.exports = std.Class(events.EventEmitter, function() {
 		this._connected = false
 		return this
 	}
+
+	this._bufferPacket = function(packet) {
+		var len = packet.length,
+			buffer = new Buffer(len)
+
+		for (var i=0; i<len; i++) {
+			buffer[i] = packet.charCodeAt(i)
+		}
+
+		return buffer
+	}
 })

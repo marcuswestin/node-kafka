@@ -28,15 +28,7 @@ module.exports = std.Class(Client, function() {
 			+ pack('N', partition)
 			+ pack('N', encodedMessages.length) + encodedMessages
 		
-		var packet = pack('N', request.length) + request,
-			len = packet.length,
-			buffer = new Buffer(len)
-		
-		for (var i=0; i<len; i++) {
-			buffer[i] = packet.charCodeAt(i)
-		}
-
-		return buffer
+		return this._bufferPacket(pack('N', request.length) + request)
 	}
 
 	this._encodeMessage = function(message) {
