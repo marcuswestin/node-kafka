@@ -20,15 +20,15 @@ module.exports = std.Class(Client, function(supr) {
 		return supr(this, 'connect', [onConnected])
 	}
 
-	this._onConnected = function(callback) {
-		if (callback) { callback() }
-		this._intervalID = setInterval(std.bind(this, '_pollForMessages'), this._pollInterval)
-	}
-
 	this.close = function() {
 		supr(this, 'close')
 		clearInterval(this._intervalID)
 		delete this._intervalID
+	}
+
+	this._onConnected = function(callback) {
+		if (callback) { callback() }
+		this._intervalID = setInterval(std.bind(this, '_pollForMessages'), this._pollInterval)
 	}
 
 	this._pollForMessages = function() {
