@@ -2,6 +2,7 @@ var std = require('std'),
 	events = require('events'),
 	Client = require('./Client'),
 	pack = require('./lib/pack'),
+	unpack = require('./lib/unpack'),
 	requestTypes = require('./requestTypes')
 
 module.exports = std.Class(Client, function(supr) {
