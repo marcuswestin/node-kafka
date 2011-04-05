@@ -24,27 +24,27 @@ Get up and running
 API
 ---
 kafka.Consumer
-		var consumer = new kafka.Consumer({
-			// these are the default values
-			host:         'localhost',
-			port:          9092,
-			topic:        'test',
-			partition:    0,
-			pollInterval: 2000,
-			maxSize:      1048576 // 1MB
-		})
-		consumer.connect()
-		consumer.on('connect', function() { })
-		consumer.on('message', function(message) { })
+	var consumer = new kafka.Consumer({
+		// these are the default values
+		host:         'localhost',
+		port:          9092,
+		topic:        'test',
+		partition:    0,
+		pollInterval: 2000,
+		maxSize:      1048576 // 1MB
+	})
+	consumer.connect()
+	consumer.on('connect', function() { })
+	consumer.on('message', function(message) { })
 		
 kafka.Producer
-		var producer = new kafka.Producer({
-			// these are also the default values
-			host:         'localhost',
-			port:         9092,
-			topic:        'test',
-			partition:    0
-		})
-		producer.connect(function() {
-			producer.send('message bytes')
-		})
+	var producer = new kafka.Producer({
+		// these are also the default values
+		host:         'localhost',
+		port:         9092,
+		topic:        'test',
+		partition:    0
+	})
+	producer.connect(function() {
+		producer.send('message bytes')
+	})
