@@ -8,5 +8,5 @@ var consumer = new kafka.Consumer({
 
 consumer.connect()
 consumer.on('message', function(message) {
-	console.log('Consumed message:', message, '\n')
+	console.log('Consumed message:', message)
 })
