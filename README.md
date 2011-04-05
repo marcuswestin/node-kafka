@@ -1,6 +1,6 @@
-Kafka javascript client
+Kafka javascript API
 -----------------------
-Interact with Kafka, consume and produce
+Interact with [Kafka](http://sna-projects.com/kafka/), LinkedIn's disk based message queue.
 
 Get up and running
 ------------------
