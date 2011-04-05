@@ -24,8 +24,7 @@ module.exports = std.Class(Client, function(supr) {
 		this._topic = opts.topic
 		this._partition = opts.partition
 		this._offset = opts.offset
-		this._maxSize = opts.maxSize
-		this._encodedFetchRequest = this._encodeFetchRequest()
+		this._buffer = new Buffer(opts.maxSize)
 	}
 
 	this.connect = function(callback) {
@@ -35,19 +34,20 @@ module.exports = std.Class(Client, function(supr) {
 
 	this.close = function() {
 		supr(this, 'close')
-		clearInterval(this._intervalID)
-		delete this._intervalID
+		clearTimeout(this._timeoutID)
+		delete this._timeoutID
 	}
 
 	this._onConnected = function(callback) {
 		if (callback) { callback() }
 		this._connection.on('data', std.bind(this, '_onData'))
-		this._intervalID = setInterval(std.bind(this, '_pollForMessages'), this._pollInterval)
 		this._pollForMessages()
 	}
 
 	this._pollForMessages = function() {
-		this._connection.write(this._encodedFetchRequest)
+		delete this._timeoutID
+		var encodedRequest = this._encodeFetchRequest()
+		this._connection.write(encodedRequest)
 	}
 
 	this._encodeFetchRequest = function() {
@@ -56,18 +56,63 @@ module.exports = std.Class(Client, function(supr) {
 			+ pack('N', this._partition)
 			// TODO: need to store a 64bit integer (bigendian). For now, set first 32 bits to 0
 			+ pack('N2', 0, this._offset)
-			+ pack('N', this._maxSize)
+			+ pack('N', this._buffer.length)
 
 		var requestSize = 2 + 2 + this._topic.length + 4 + 8 + 4
 
 		return this._bufferPacket(pack('N', requestSize) + request)
 	}
 
-	this._onData = function(data) {
-		var messages = [],
-			processed = 0,
-			length = data.length - 4
-		console.log('onData', length, data)
-		this.emit('Message', 'TODO: Actually decode messageBytes')
+	this._onData = function(buf) {
+		var index = 0
+		if (!this._remainingBytes) {
+			var boundedBufferInfo = unpack('Nsize/nerror', buf.toString('utf8', 0, 6))
+			if (boundedBufferInfo.error) { throw "Consumer error. Kafka error code: " + errorCode }
+			this._remainingBytes = boundedBufferInfo.size - 2 // 2 for the error code
+			this._readBytes = 0
+			index += 6
+		}
+
+		if (index == buf.length) {
+			this._schedulePoll()
+			return
+		}
+
+		var dataSize = buf.length - index
+		buf.copy(this._buffer, this._readBytes, index, dataSize)
+		this._remainingBytes -= dataSize
+		this._readBytes += dataSize
+
+		if (this._remainingBytes == 0) { this._parseBuffer() }
+	}
+
+	this._parseBuffer = function() {
+		var index = 0
+		while (index < this._readBytes) {
+			var messageInfo = unpack('Nsize/Cmagic/Nchecksum', this._buffer.toString('utf8', index, index + 9))
+			index += 9
+			var payloadLength = messageInfo.size - 5 // 1 magic + 4 checksum
+			var payload = this._buffer.toString('utf8', index, index + payloadLength)
+			index += payloadLength
+			try {
+				this.emit('message', payload)
+			} catch(e) { console.log("Message handler threw", e) }
+		}
+		this._offset += this._readBytes
+		this._schedulePoll()
+	}
+
+	this._schedulePoll = function() {
+		if (this._timeoutID) { return }
+		this._timeoutID = setTimeout(std.bind(this, '_pollForMessages'), this._pollInterval)
+	}
+
+	this._debufferPacket = function(buf) {
+		var len = buf.length,
+			result = ''
+		for (var i=0; i<len; i++) {
+			result += String.fromCharCode(buf[i])
+		}
+		return result
 	}
 })
