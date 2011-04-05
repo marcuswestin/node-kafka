@@ -7,9 +7,8 @@ Get up and running
 1. `npm install kafka`
 2. Start zookeeper, kafka server, and a consumer (http://sna-projects.com/kafka/quickstart.php)
 3. publish and consumer some messages:
-
 	var kafka = require('kafka')
-
+	
 	var consumer = new kafka.Consumer()
 	consumer.connect().on('message', function(message) {
 		console.log("Consumed message:", message)
