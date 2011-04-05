@@ -14,7 +14,7 @@ module.exports = std.Class(Client, function(supr) {
 		topic: 'test',
 		partition: 0,
 		offset: 0,
-		maxSize: 1000000
+		maxSize: 1048576 //1MB
 	}
 
 	this._init = function(opts) {
