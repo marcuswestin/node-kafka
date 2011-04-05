@@ -1,8 +1,6 @@
 var std = require('std'),
 	events = require('events'),
 	Client = require('./Client'),
-	pack = require('./lib/pack'),
-	unpack = require('./lib/unpack'),
 	requestTypes = require('./requestTypes')
 
 module.exports = std.Class(Client, function(supr) {
@@ -51,22 +49,22 @@ module.exports = std.Class(Client, function(supr) {
 	}
 
 	this._encodeFetchRequest = function() {
-		var request = pack('n', this._requestType)
-			+ pack('n', this._topic.length) + this._topic
-			+ pack('N', this._partition)
+		var request = std.pack('n', this._requestType)
+			+ std.pack('n', this._topic.length) + this._topic
+			+ std.pack('N', this._partition)
 			// TODO: need to store a 64bit integer (bigendian). For now, set first 32 bits to 0
-			+ pack('N2', 0, this._offset)
-			+ pack('N', this._buffer.length)
+			+ std.pack('N2', 0, this._offset)
+			+ std.pack('N', this._buffer.length)
 
 		var requestSize = 2 + 2 + this._topic.length + 4 + 8 + 4
 
-		return this._bufferPacket(pack('N', requestSize) + request)
+		return this._bufferPacket(std.pack('N', requestSize) + request)
 	}
 
 	this._onData = function(buf) {
 		var index = 0
 		if (!this._remainingBytes) {
-			var boundedBufferInfo = unpack('Nsize/nerror', buf.toString('utf8', 0, 6))
+			var boundedBufferInfo = std.unpack('Nsize/nerror', buf.toString('utf8', 0, 6))
 			if (boundedBufferInfo.error) { throw "Consumer error. Kafka error code: " + errorCode }
 			this._remainingBytes = boundedBufferInfo.size - 2 // 2 for the error code
 			this._readBytes = 0
@@ -89,7 +87,7 @@ module.exports = std.Class(Client, function(supr) {
 	this._parseBuffer = function() {
 		var index = 0
 		while (index < this._readBytes) {
-			var messageInfo = unpack('Nsize/Cmagic/Nchecksum', this._buffer.toString('utf8', index, index + 9))
+			var messageInfo = std.unpack('Nsize/Cmagic/Nchecksum', this._buffer.toString('utf8', index, index + 9))
 			index += 9
 			var payloadLength = messageInfo.size - 5 // 1 magic + 4 checksum
 			var payload = this._buffer.toString('utf8', index, index + payloadLength)

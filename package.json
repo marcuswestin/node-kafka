@@ -5,7 +5,7 @@
   "homepage": "https://github.com/marcuswestin/node-kafka",
   "author": "Marcus Westin <narcvs@gmail.com> (http://marcuswest.in)",
   "dependencies": {
-    "std": "= 0.1.6"
+    "std": "= 0.1.8"
   },
   "repository": {
     "type": "git",

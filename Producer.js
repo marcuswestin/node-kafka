@@ -1,6 +1,4 @@
 var std = require('std'),
-	pack = require('./lib/pack'),
-	crc32 = require('./lib/crc32'),
 	Client = require('./Client'),
 	requestTypes = require('./requestTypes')
 
@@ -20,18 +18,18 @@ module.exports = std.Class(Client, function() {
 		var encodedMessages = ''
 		for (var i=0; i<messages.length; i++) {
 			var encodedMessage = this._encodeMessage(messages[i])
-			encodedMessages += pack('N', encodedMessage.length) + encodedMessage
+			encodedMessages += std.pack('N', encodedMessage.length) + encodedMessage
 		}
 
-		var request = pack('n', this._requestType)
-			+ pack('n', topic.length) + topic
-			+ pack('N', partition)
-			+ pack('N', encodedMessages.length) + encodedMessages
+		var request = std.pack('n', this._requestType)
+			+ std.pack('n', topic.length) + topic
+			+ std.pack('N', partition)
+			+ std.pack('N', encodedMessages.length) + encodedMessages
 		
-		return this._bufferPacket(pack('N', request.length) + request)
+		return this._bufferPacket(std.pack('N', request.length) + request)
 	}
 
 	this._encodeMessage = function(message) {
-		return pack('CN', this._magicValue, crc32(message)) + message
+		return std.pack('CN', this._magicValue, std.crc32(message)) + message
 	}
 })
