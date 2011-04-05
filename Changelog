@@ -1,3 +1,6 @@
+v0.1.7
++ Improved documentation
+
 v0.1.6
 + Cleanup - move js files into lib directory and depend on std for pack/unpack/crc32
 + Improve connect API - Producer and Consumer now emit "connect" event when connected, rather than take a callback to #connect()
