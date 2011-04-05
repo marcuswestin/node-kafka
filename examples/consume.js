@@ -3,8 +3,7 @@ var kafka = require('../kafka-node')
 var consumer = new kafka.Consumer({
 	host:'localhost',
 	port:9092,
-	topic:'test',
-	pollInterval: 1000
+	topic:'test'
 })
 
 consumer.connect()
