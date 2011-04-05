@@ -1,4 +1,4 @@
-var kafka = require('../kafka-node')
+var kafka = require('../kafka')
 
 var consumer = new kafka.Consumer({
 	host:'localhost',

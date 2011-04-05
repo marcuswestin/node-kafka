@@ -23,7 +23,7 @@
       "url": "http://github.com/marcuswestin/node-kafka/raw/master/LICENSE"
     }
   ],
-  "main": "kafka-node",
+  "main": "kafka",
   "directories": {
     "lib": "."
   },

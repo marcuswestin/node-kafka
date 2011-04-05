@@ -1,4 +1,4 @@
-var kafka = require('../kafka-node')
+var kafka = require('../kafka')
 
 var producer = new kafka.Producer({ host: 'localhost', port: 9092 })
 
