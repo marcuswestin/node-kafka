@@ -6,7 +6,7 @@ var consumer = new kafka.Consumer({
 	topic:'test'
 })
 
-consumer.connect()
-consumer.on('message', function(message) {
+consumer.connect().on('message', function(message) {
 	console.log('Consumed message:', message)
 })
+
