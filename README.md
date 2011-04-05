@@ -4,18 +4,18 @@ Interact with Kafka, consume and produce
 
 Get up and running
 ------------------
-1. `npm install kafka`
-2. Start zookeeper, kafka server, and a consumer (http://sna-projects.com/kafka/quickstart.php)
-3. publish and consumer some messages:
+Install kafka
+	npm install kafka
+Start zookeeper, kafka server, and a consumer
+	// see http://sna-projects.com/kafka/quickstart.php
+Publish and consume some messages!
 	var kafka = require('kafka')
 	
-	var consumer = new kafka.Consumer()
-	consumer.connect().on('message', function(message) {
+	new kafka.Consumer().connect().on('message', function(message) {
 		console.log("Consumed message:", message)
 	})
 	
-	var producer = new kafka.Producer()
-	producer.connect().on('connect', function() {
+	var producer = new kafka.Producer().connect().on('connect', function() {
 		producer.send("hey!")
 		producer.close()
 	})
