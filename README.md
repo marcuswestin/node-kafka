@@ -4,11 +4,15 @@ Interact with [Kafka](http://sna-projects.com/kafka/), LinkedIn's disk based mes
 
 Get up and running
 ------------------
-Install kafka
+
+ 1 Install kafka
+
 	npm install kafka
-Start zookeeper, kafka server, and a consumer
-	// see http://sna-projects.com/kafka/quickstart.php
-Publish and consume some messages!
+
+ 2 Start zookeeper, kafka server, and a consumer (see http://sna-projects.com/kafka/quickstart.php)
+
+ 3 Publish and consume some messages!
+
 	var kafka = require('kafka')
 	
 	new kafka.Consumer().connect().on('message', function(message) {
@@ -22,7 +26,9 @@ Publish and consume some messages!
 
 API
 ---
-kafka.Consumer
+
+`kafka.Consumer`
+
 	var consumer = new kafka.Consumer({
 		// these are the default values
 		host:         'localhost',
@@ -35,8 +41,9 @@ kafka.Consumer
 	consumer.connect()
 	consumer.on('connect', function() { })
 	consumer.on('message', function(message) { })
-		
-kafka.Producer
+
+`kafka.Producer`
+
 	var producer = new kafka.Producer({
 		// these are also the default values
 		host:         'localhost',
