@@ -1,3 +1,10 @@
+intended v0.2.0
++ Allow for multiple topic subscriptions
+  - new kafka.Consumer({ topics:['foo', 'bar'] })
+  - consumer.addTopic('foo')
+  - consumer.removeTopic('foo')
+  - consumer.on('message', function(message, topic) { ... })
+
 intended v0.1.8
 + Interpret Kafka's error messages correctly
 
