@@ -54,3 +54,9 @@ API
 	producer.connect(function() {
 		producer.send('message bytes')
 	})
+
+Authors
+-------
+
+- Marcus Westin
+- Taylor Gautier (tagged)
