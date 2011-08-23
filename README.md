@@ -60,3 +60,8 @@ Authors
 
 - Marcus Westin
 - Taylor Gautier (tagged)
+
+Contributors
+------------
+
+- Laurie Harper
