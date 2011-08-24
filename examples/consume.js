@@ -10,8 +10,6 @@ var consumer = new kafka.Consumer({
 	port:9092,
 })
 
-consumer.connect().on('message', function(topic, message) {
+consumer.subscribeTopic('test').on('message', function(topic, message) {
 	console.log('Consumed message:', message)
-})
-
-consumer.subscribeTopic('test')
+}).connect()

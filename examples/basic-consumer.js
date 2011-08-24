@@ -30,7 +30,7 @@ consumer.on('message', function(topic, message) {
 consumer.on('last', function(topic, offset) {
     consumer.fetchTopic({name: topic, offset: offset})
 })
-
-consumer.connect()
-consumer.fetchTopic({name: "test"})
-consumer.fetchTopic({name: "test2"})
+consumer.connect(function() { 
+    consumer.fetchTopic({name: "test"})
+    consumer.fetchTopic({name: "test2"})
+})
