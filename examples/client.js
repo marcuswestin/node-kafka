@@ -19,19 +19,19 @@
  */
 var kafka = require('kafka')
 
-var consumer = new kafka.BasicConsumer({
+var client  = new kafka.Client({
     host:'localhost',
     port:9092,
 })
 
-consumer.on('message', function(topic, message, offset) {
+client.on('message', function(topic, message, offset) {
     console.log("Consumed topic:" + topic + " message:" + message)
 
 })
-consumer.on('lastmessage', function(topic, offset) {
-    consumer.fetchTopic({name: topic, offset: offset})
+client.on('lastmessage', function(topic, offset) {
+    client.fetchTopic({name: topic, offset: offset})
 })
-consumer.connect(function() { 
-    consumer.fetchTopic({name: "test", offset: 0})
-    consumer.fetchTopic({name: "test2"})
+client.connect(function() { 
+    client.fetchTopic({name: "test", offset: 0})
+    client.fetchTopic({name: "test2"})
 })
