@@ -26,12 +26,14 @@ var consumer = new kafka.BasicConsumer({
 
 consumer.on('message', function(topic, message, offset) {
     console.log("Consumed topic:" + topic + " message:" + message)
-
 })
 consumer.on('lastmessage', function(topic, offset) {
     consumer.fetchTopic({name: topic, offset: offset})
 })
+consumer.on('lastoffset', function(topic, offset) {
+    console.log(offset)
+    consumer.fetchTopic({name: topic, offset: offset})
+})
 consumer.connect(function() { 
-    consumer.fetchTopic({name: "test", offset: 0})
-    consumer.fetchTopic({name: "test2"})
+    consumer.fetchOffsets('test')
 })
