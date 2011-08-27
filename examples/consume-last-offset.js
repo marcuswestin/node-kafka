@@ -31,7 +31,6 @@ consumer.on('lastmessage', function(topic, offset) {
     consumer.fetchTopic({name: topic, offset: offset})
 })
 consumer.on('lastoffset', function(topic, offset) {
-    console.log(offset)
     consumer.fetchTopic({name: topic, offset: offset})
 })
 consumer.connect(function() { 
