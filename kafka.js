@@ -1,7 +1,7 @@
 module.exports = {
 	Producer: require('./lib/Producer'),
 	Consumer: require('./lib/Consumer'),
-	BasicConsumer: require('./lib/BasicConsumer'),
+	Client: require('./lib/Client'),
 	error: require('./lib/error')
 }
 

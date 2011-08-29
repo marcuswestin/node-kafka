@@ -15,7 +15,7 @@ Get up and running
 
 	var kafka = require('kafka')
 	
-	new kafka.Consumer().connect().on('message', function(message) {
+	new kafka.Consumer().connect().subscribeTopic('test').on('message', function(topic, message) {
 		console.log("Consumed message:", message)
 	})
 	
@@ -33,14 +33,15 @@ API
 		// these are the default values
 		host:         'localhost',
 		port:          9092,
-		topic:        'test',
-		partition:    0,
-		pollInterval: 2000,
-		maxSize:      1048576 // 1MB
+		pollInterval:  2000,
+		maxSize:       1048576 // 1MB
 	})
-	consumer.connect()
-	consumer.on('connect', function() { })
-	consumer.on('message', function(message) { })
+    consumer.on('message', function(topic, message) { 
+        console.log(message)
+    })
+	consumer.connect(function() {
+        consumer.subscribeTopic({name: 'test', partition: 0})
+    })
 
 `kafka.Producer`
 
