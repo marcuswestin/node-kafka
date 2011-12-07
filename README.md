@@ -1,6 +1,6 @@
 Kafka javascript API
 -----------------------
-Interact with [Kafka](http://sna-projects.com/kafka/), LinkedIn's disk based message queue.
+Interact with [Kafka](http://sna-projects.com/kafka/), LinkedIn's disk based message queue using node.js
 
 Get up and running
 ------------------
