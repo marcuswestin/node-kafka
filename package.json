@@ -22,7 +22,7 @@
   ],
   "main": "kafka",
   "dependencies": {
-    "std": "0.1.18"
+    "std": "0.1.26"
   },
   "directories": {
     "lib": "lib"
