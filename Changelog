@@ -1,3 +1,6 @@
+v0.2.1
++ Fix std dependency version (@philips)
+
 v0.2.0
 + Improved API
 + Better error handling
