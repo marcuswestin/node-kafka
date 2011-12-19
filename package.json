@@ -1,7 +1,7 @@
 {
   "name": "kafka",
   "description": "A node client for Kafka",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "homepage": "https://github.com/marcuswestin/node-kafka",
   "author": "Marcus Westin <narcvs@gmail.com> (http://marcuswest.in)",
   "repository": {

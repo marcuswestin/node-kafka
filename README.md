@@ -66,3 +66,4 @@ Contributors
 ------------
 
 - Laurie Harper
+- @omnichuck
