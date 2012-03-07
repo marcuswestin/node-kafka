@@ -1,3 +1,10 @@
+Main project repo moved
+-----------------------
+This project is most actively used and maintained by Taylor Gautier at Tagged.
+
+Please see the [Tagged node-kafka repo](https://github.com/tagged/node-kafka).
+
+
 Kafka javascript API
 -----------------------
 Interact with [Kafka](http://sna-projects.com/kafka/), LinkedIn's disk based message queue using node.js
@@ -59,7 +66,7 @@ API
 Authors
 -------
 
-- Marcus Westin
+- Marcus Westin (clover)
 - Taylor Gautier (tagged)
 
 Contributors
