@@ -22,7 +22,7 @@
   ],
   "main": "kafka",
   "dependencies": {
-    "std": "0.1.28"
+    "std": "git://github.com/rbrcurtis/std.js.git"
   },
   "directories": {
     "lib": "lib"
