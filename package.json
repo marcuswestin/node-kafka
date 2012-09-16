@@ -1,7 +1,7 @@
 {
   "name": "kafka",
   "description": "A node client for Kafka",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/marcuswestin/node-kafka",
   "author": "Marcus Westin <narcvs@gmail.com> (http://marcuswest.in)",
   "repository": {
@@ -22,7 +22,7 @@
   ],
   "main": "kafka",
   "dependencies": {
-    "std": "git://github.com/rbrcurtis/std.js.git"
+    "std": "0.1.36"
   },
   "directories": {
     "lib": "lib"
