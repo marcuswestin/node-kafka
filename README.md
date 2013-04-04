@@ -1,9 +1,19 @@
-Main project repo moved
------------------------
-This project is most actively used and maintained by Taylor Gautier at Tagged.
+No longer maintained
+====================
 
-Please see the [Tagged node-kafka repo](https://github.com/tagged/node-kafka).
+I am no longer maintaining node-kafka, and recommend checking out on of the following alternatives:
 
+node-kafka branches:
+- https://github.com/tagged/node-kafka
+- https://github.com/radekg/node-kafka
+- https://github.com/terrancesnyder/node-kafka
+
+Process, a more recent node.js kafka library:
+- https://github.com/cainus/Prozess
+
+
+Legacy notes:
+=============
 
 Kafka javascript API
 -----------------------
