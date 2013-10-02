@@ -1,14 +1,14 @@
-No longer maintained
-====================
+NOT MAINTAINED
+==============
 
-I am no longer maintaining node-kafka, and recommend checking out on of the following alternatives:
+I'm no longer maintaining node-kafka.
 
-node-kafka branches:
-- https://github.com/tagged/node-kafka
+Check out on of the following node-kafka branches:
+
 - https://github.com/radekg/node-kafka
 - https://github.com/terrancesnyder/node-kafka
 
-Process, a more recent node.js kafka library:
+Or use Prozess, another node.js kafka library:
 - https://github.com/cainus/Prozess
 
 
