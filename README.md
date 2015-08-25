@@ -3,10 +3,7 @@ NOT MAINTAINED
 
 I'm no longer maintaining node-kafka.
 
-Check out on of the following node-kafka branches:
-
-- https://github.com/radekg/node-kafka
-- https://github.com/terrancesnyder/node-kafka
+See [kafka-node](https://github.com/SOHU-Co/kafka-node) for a maintained kafka library supporting latest version of kafka.
 
 Or use Prozess, another node.js kafka library:
 - https://github.com/cainus/Prozess
